@@ -4,6 +4,32 @@
   
   
   <entry>
+    <title>cf323c</title>
+    <link href="/2021/03/06/cf323c/"/>
+    <url>/2021/03/06/cf323c/</url>
+    
+    <content type="html"><![CDATA[<p>比较水的一个题。</p><p>主要是考虑这个排列的性质。</p><p>如果只考虑一次询问，让你把在 <span class="math inline">\(a:[l_1,r_1]\)</span> 里的与 <span class="math inline">\(b:[l_2,r_2]\)</span> 的相同数的个数求出来。</p><p>我们有这样一种思路，把 <span class="math inline">\(a_x\)</span> 一个一个加进去，直到 <span class="math inline">\(x=l_1-1\)</span>。 记录当前状态，然后接着加入，直到 <span class="math inline">\(x=r\)</span> ，记录状态。</p><p>把这两个状态分别求出在 <span class="math inline">\(b:[l_2,r_2]\)</span> 里面有多少个。在相减，便是所求。</p><p>线段树维护即可，设 <span class="math inline">\(p_i\)</span> 表示 <span class="math inline">\(i\)</span> 在 <span class="math inline">\(b\)</span> 中的位置。那么加入 <span class="math inline">\(a_x\)</span> 操作等价于在 <span class="math inline">\(b\)</span> 的 <span class="math inline">\({p_{a_x}}\)</span> 处加 <span class="math inline">\(1\)</span> ，然后区间求和。</p><p>那么多次询问用主席树记录状态即可。</p><p>代码不放了。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2021/02/24/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/"/>
+    <url>/2021/02/24/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</url>
+    
+    <content type="html"><![CDATA[<p>内积：</p><p><span class="math display">\[\vec{a}=(x_1,y_1)\\\vec{b}=(x_2,y_2)\\\vec{a}\cdot\vec{b}=\left| \vec{a} \right | \left| \vec{b} \right | \cos\theta = x_1\cdot x_2+y_1\cdot y_2\\\]</span></p><p>有余弦定理： <span class="math display">\[\left| \vec{a} \right | \left| \vec{b} \right | \cos\theta=\frac{\left| \vec{a} \right |^2 + \left| \vec{b} \right |^2 -((x_1-x_2)^2+(y_1-y_2)^2)}{2}=\frac{(x_1^2+y_1^2)+(x_2^2+y_2^2)-(x_1^2+y_1^2+x_2^2+y_2^2-2x_1\cdot x_2-2y_1\cdot y_2)}{2}=x_1\cdot x_2+y_1\cdot y_2\]</span></p><hr /><p>外积： <span class="math display">\[\vec{a}\times\vec{b}=\left| \vec{a} \right | \left| \vec{b} \right | \sin\theta = x_1\cdot y_2-x_1\cdot y_2\\\]</span> 外积本质上再算面积。 <span class="math display">\[\left| \vec{a} \right | \left| \vec{b} \right | \sin\theta=2\times(\frac{(x_1+x_2)\times(y_1+y_2)-x_1\times y_1-x_2\times((y_1+y_2)+y_1)}{2})=x_1\cdot y_2-x_1\cdot y_2\\\]</span> 这个式子的含义就是在用大三角形减去小三角形和一个梯形。</p><hr /><p>旋转矩形： <span class="math display">\[\begin{bmatrix}\cos\theta&amp;\sin\theta\\-\sin\theta&amp;\cos\theta\end{bmatrix}\]</span> 也就是说 <span class="math inline">\((x,y)\)</span> 绕原点逆时针旋转 <span class="math inline">\(\theta\)</span> 后的坐标 <span class="math inline">\((x&#39;,y&#39;)\)</span>为： <span class="math display">\[\begin{bmatrix}x&amp;y\end{bmatrix}\times\begin{bmatrix}\cos\theta&amp;\sin\theta\\-\sin\theta&amp;\cos\theta\end{bmatrix}=\begin{bmatrix}x\cos\theta-y\sin\theta&amp;x\sin\theta+y\cos\theta\end{bmatrix}=\begin{bmatrix}x&#39;&amp;y&#39;\end{bmatrix}\]</span></p><p><span class="math display">\[x&#39;=x\cos\theta-y\sin\theta\\y&#39;=x\sin\theta+y\cos\theta\]</span></p><p><span class="math display">\[\begin{aligned}&amp;\sum_{i=1}^{n}\sum_{j=1}^{m} \varphi(ij)\\&amp;\sum_{d=1}^{n}\sum_{i=1}^n\sum_{j=1}^m\frac{\varphi(i)\varphi(j)}{\varphi(\gcd(i,j))}\gcd(i,j)[\gcd(i,j)=d]\\&amp;\sum_{d=1}^n\sum_{i=1}^{n/d}\sum_{j=1}^{m/d}\frac{\varphi(id)\varphi(jd)}{\varphi(d)}d[\gcd(i,j)=1]\\&amp;\sum_{d=1}^n\frac{d}{\varphi(d)}\sum_{i=1}^{n/d}\sum_{j=1}^{m/d}{\varphi(id)\varphi(jd)}[\gcd(i,j)=1]\\&amp;\end{aligned}\]</span></p><p>上面全不对。 <span class="math display">\[d(ij)=\sum_{x|i,y|j} [\gcd(i,j)=1]\]</span> 理由，如果定义可重集 <span class="math inline">\(S=\{k|k=x\times y,x|i,y|j\},T=\{k\mid k|i\times j\}\)</span> ,<span class="math inline">\(T\subset S\)</span></p><p>重复了什么？对于一个质因数考虑。 <span class="math display">\[\begin{aligned}p&amp;:[1,p,p^2,\cdots,p^{\alpha}],[1,p,p^2,\cdots,p^{\gamma}]\\p&amp;:[1,p,p^2,\cdots,p^{\alpha+\gamma}]\end{aligned}\]</span> 如果分别枚举 第一个和第二个，会出现 <span class="math inline">\([p^a]\cdot[p^b]=[p^{a+b}]=[p^c]\cdot[p^d]\)</span> 这种被多次算的情况。</p><p>为了防止算重，就考虑先在一个集合里面选，如果满了，在到另外外一个集合选。</p><p>但这样，满了之后也不太好表示。</p><p>于是乎，我们干脆加入第一个满了，我们就不管第一个里面的了，全部看成 <span class="math inline">\(p^0\)</span> ,枚举第二个的时候就代表第一个已经满了。</p><p>所以现在便有形式 <span class="math inline">\(d(ij)=\sum\limits_{x|i,y|j} [\gcd(i,j)=1]\)</span>。</p><p>注意我们这么枚举并不会算重，因为<span class="math inline">\([p^a]\cdot[p^0]\)</span> 与 <span class="math inline">\([p^0]\cdot[p^a]\)</span> 的意义并不相同！</p><span class="math display">\[\sum_{i}^a\sum_j^b\sum_k^c d(ijk)\]</span> 类似的，我们可以根据上面的思想，把 <span class="math inline">\(p\)</span> 的次幂拆成 <span class="math inline">\(p:[1,p,p^2,\cdots,p^\alpha]\cdot[1,p,p^2,\cdots,p^\gamma]\cdot[1,p,p^2,\cdots,p^\omega]\)</span> $$<span class="math display">\[\begin{aligned}&amp;\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c d(ijk)\\&amp;\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c \sum_{t_1\mid i,t_2\mid j,t_3\mid k} [\gcd(t_1,t_2)=1][\gcd(t_2,t_3)=1][\gcd(t_3,t_1)=1]\\&amp;\sum_{t_1=1}^a\sum_{t_2=1}^b\sum_{t_3=1}^c [\gcd(t_1,t_2)=1][\gcd(t_2,t_3)=1][\gcd(t_3,t_1)=1]\lfloor\frac{a}{t_1}\rfloor\lfloor\frac{b}{t_2}\rfloor\lfloor\frac{c}{t_3}\rfloor\\&amp;\sum_{t_1=1}^a\sum_{t_2=1}^b\sum_{t_3=1}^c \sum_{x|t_1,x|t_2}\mu(x)\sum_{y|t_2,y|t_3}\mu(y)\sum_{z|t_1,z|t_3}\mu(z)\lfloor\frac{a}{t_1}\rfloor\lfloor\frac{b}{t_2}\rfloor\lfloor\frac{c}{t_3}\rfloor\\&amp;\sum_{x}\sum_{y}\sum_{z}\mu(x)\mu(y)\mu(z)\sum_{lcm(x,z)|t_1}\lfloor\frac{a}{t_1}\rfloor\sum_{lcm(x,y)|t_2}\lfloor\frac{b}{t_2}\rfloor\sum_{lcm(y,z)|t_3}\lfloor\frac{c}{t_3}\rfloor\\&amp;f(x)=\sum_{x|d}\lfloor\frac{a}{d}\rfloor\\&amp;\sum_{x}\sum_{y}\sum_{z}\mu(x)\mu(y)\mu(z)f(lcm(x,z))f(lcm(x,y))f(lcm(y,z))\\\end{aligned}\]</span><p>$$</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>2021-2-21</title>
     <link href="/2021/02/21/2021-2-21/"/>
     <url>/2021/02/21/2021-2-21/</url>
@@ -86,7 +112,7 @@
     <link href="/2021/01/01/top/"/>
     <url>/2021/01/01/top/</url>
     
-    <content type="html"><![CDATA[<p>由于本人实力有限，博客放大到$110% $或许会有更好的体验。</p>]]></content>
+    <content type="html"><![CDATA[<p>由于本人实力有限，博客放大到 <span class="math inline">\(110\%\)</span> 或许会有更好的体验。</p>]]></content>
     
     
     
